@@ -1,0 +1,86 @@
+body{
+  background-image: url("https://image.freepik.com/free-vector/detailed-grunge-texture-background_1048-8612.jpg");
+  background-size: 60%;
+}
+.navbar-nav{
+  margin: auto;
+}
+.nav-item{
+  margin: 0 40px;
+}
+.tab-content{
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  top: 120px;
+  width: 80%;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+}
+/*.tab-content > div:last-child {
+  display: none;
+}*/
+#find > .cards{
+  width: 75%;
+}
+#rezume > .cards{
+  width: 90%;
+  margin: auto;
+}
+#rezume > .navbar{
+  width: 90%;
+  margin: auto;
+}
+#rezume{
+  display: flex;
+  flex-flow: column;
+}
+#find > .cards > .card{
+  margin-left: 20px;
+}
+.search{
+  position: relative;
+  width: 25%;
+  height: 105px;
+  background-color: #eaeaea;
+  border-radius: 5px;
+  padding: 5px;
+}
+button{
+  width: 100%;
+}
+.card-body{
+  position: relative;
+  height: 160px;
+}
+.card-title{
+  position: absolute;
+  width: 70%;
+}
+.status{
+  position: absolute;
+  right: 20%;
+}
+.dataBegin{
+  position: absolute;
+  right: 5%;
+  display: block;
+}
+.dataEnd{
+  position: absolute;
+  right: 5%;
+  display: block;
+  top: 25%;
+}
+.card-text{
+  position: absolute;
+  top: 60px;
+  width: 70%;
+  line-height: 1;
+}
+.card-link{
+  position: relative;
+  top: 90%;
+}
