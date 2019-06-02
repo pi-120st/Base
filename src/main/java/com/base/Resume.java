@@ -20,7 +20,7 @@ public class Resume {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId")
-    private User user;
+    private UserInfo user;
 
     private String specialization;
     private float experience;
@@ -31,7 +31,7 @@ public class Resume {
     private Currency salary;
     private String resumeText;
 
-    public Resume(User user, String specialization, float experience, String schedule, Date creationDate, Currency salary, String resumeText) {
+    public Resume(UserInfo user, String specialization, float experience, String schedule, Date creationDate, Currency salary, String resumeText) {
         this.user = user;
         this.specialization = specialization;
         this.experience = experience;
