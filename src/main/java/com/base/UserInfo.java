@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "UserTable")
 @Getter
 @Setter
-public class User {
+public class UserInfo {
     @Id
     @GeneratedValue
     private long UserId;
@@ -30,7 +30,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Resume> resumes = new ArrayList<Resume>();
 
-    public User(SignUp signUp, Date birthday, String city) {
+    public UserInfo(SignUp signUp, Date birthday, String city) {
         this.signUp = signUp;
         this.birthday = birthday;
         this.city = city;

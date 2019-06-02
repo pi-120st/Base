@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,21 +82,21 @@
 
         <div id="login">
           <h1>Welcome Back!</h1>
-
-          <form action="/login" method="post">
+          <c:url value="/j_spring_security_check" var="loginUrl" />
+          <form action="${loginUrl}" method="post">
 
             <div class="field-wrap">
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email" name="email" required autocomplete="off"/>
+            <input type="email" name="j_email" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" name="password" required autocomplete="off"/>
+            <input type="password" name="j_password" required autocomplete="off"/>
           </div>
 
           <!--p class="forgot"><a href="#">Forgot Password?</a></p-->
