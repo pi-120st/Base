@@ -11,9 +11,12 @@ public class BaseService {
 
     //SignUp
     @Transactional
-    public void signUpUser(SignUp signUp){signUpRepository.save(signUp);}
+    public void signUpUser(SignUp signUp) {
+        signUpRepository.save(signUp);
+    }
+
     @Transactional
-    public SignUp findByLogin(String email){
+    public SignUp findByLogin(String email) {
         return signUpRepository.findByLogin(email);
     }
 }
