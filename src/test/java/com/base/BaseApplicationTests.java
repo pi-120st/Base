@@ -29,8 +29,6 @@ public class BaseApplicationTests {
     @Mock
     private BaseService baseService;
 
-    BaseService spy = Mockito.spy(baseService);
-
     @InjectMocks
     private BaseController baseController;
 
@@ -59,8 +57,8 @@ public class BaseApplicationTests {
         ArgumentCaptor<SignUp> test = ArgumentCaptor.forClass(SignUp.class);
         SignUp signUps = (
                 new SignUp("Zogus", "Maximus", 12345678, "yourMail@mail.com", "1234", "USER"));
-        verify(spy, times(1)).signUpUser(signUps);
-        Mockito.doNothing().when(spy).signUpUser(signUps);
+        verify(baseService, times(1)).signUpUser(signUps);
+        Mockito.doNothing().when(baseService).signUpUser(signUps);
         List<SignUp> test2 = test.getAllValues();
         assertEquals("Zogus", test2.get(0));
         assertEquals("Maximus", test2.get(1));
