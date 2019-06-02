@@ -1,12 +1,11 @@
 package com.base;
 
 import org.apache.catalina.filters.CorsFilter;
+import org.hibernate.cache.spi.AbstractRegionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -14,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -29,6 +29,8 @@ public class BaseApplicationTests {
     @Mock
     private BaseService baseService;
 
+    BaseService spy = Mockito.spy(baseService);
+
     @InjectMocks
     private BaseController baseController;
 
@@ -42,24 +44,32 @@ public class BaseApplicationTests {
 
     @Test
     public void testFindByLogin() {
-        SignUp signUps = (
-                new SignUp("Zogus", "Maximus", 12345678, "yourMail@mail.com", "1234", "USER"));
-
-        //doAnswer(returnsFirstArg()).when(baseService).signUpUser(signUps).thenReturn(signUps);
-        doAnswer(returnsFirstArg()).when(baseService).signUpUser(signUps);
-        verify(baseService, times(1)).signUpUser(signUps);
-        verify(baseService, never()).findByLogin("Zogus");
+       List <SignUp> signUps = Arrays.asList(
+       new SignUp("Zogus", "Maximus", 12345678, "yourMail@mail.com", "1234", "USER"));
+        List<SignUp> spy = spy(signUps);
+        when(baseService.findByLogin("yourMail@mail.com")).thenReturn(spy.get(4));
+        assertEquals("yourMail@mail.com", spy.get(4));
+        doAnswer(returnsFirstArg()).when(baseService).signUpUser(signUps.get(4));
+        verify(baseService, never()).signUpUser(signUps.get(1));
+        verify(baseService, times(1)).signUpUser(signUps.get(1));
         verifyNoMoreInteractions(baseService);
     }
 
     public void testSignUps() {
-        //SignUp signUp = new SignUp("Test", "TestSurname", 12221, "mail", "qwe", "ADMIN");
-        //when(baseService.signUpUser(signUp));
-    }
-
-    public void test() {
-        SignUp signUps = (new SignUp("Test", "TestSurname", 12221, "mail", "qwe", "ADMIN"));
-        assertEquals(signUps, "Test");
-
+        ArgumentCaptor<SignUp> test = ArgumentCaptor.forClass(SignUp.class);
+        SignUp signUps = (
+                new SignUp("Zogus", "Maximus", 12345678, "yourMail@mail.com", "1234", "USER"));
+        verify(spy, times(1)).signUpUser(signUps);
+        Mockito.doNothing().when(spy).signUpUser(signUps);
+        List<SignUp> test2 = test.getAllValues();
+        assertEquals("Zogus", test2.get(0));
+        assertEquals("Maximus", test2.get(1));
+        assertEquals(12345678, test2.get(2));
+        assertEquals("yourMail@mail.com", test2.get(3));
+        assertEquals("1234", test2.get(4));
+        assertEquals("USER", test2.get(5));
+        verify(baseService, never()).findByLogin("yourMail@mail.com");
+        verify(baseService, times(1)).signUpUser(signUps);
+        verifyNoMoreInteractions(baseService);
     }
 }
