@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsServiceImpl")
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private CustomSuccessHandler customSuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){return new BCryptPasswordEncoder(); }
@@ -36,24 +40,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/admin").access("hasAuthority('ADMIN')")
+                .antMatchers("/employee").access("hasAuthority('EMPLOYEE')")
+                .antMatchers("/employer").access("hasAuthority('EMPLOYER')")
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/employee").hasRole("EMPLOYEE")
-                .antMatchers("/employer").hasRole("EMPLOYER")
-                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/")
-                .loginProcessingUrl("/j_spring_security_check")
-                .failureUrl("/")
-                .usernameParameter("j_email")
-                .passwordParameter("j_password")
-                .permitAll()
+                .loginProcessingUrl("/login")
+//                .defaultSuccessUrl("/employee")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .successHandler(customSuccessHandler)
                 .and()
                 .logout()
                 .permitAll()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
     }
 }

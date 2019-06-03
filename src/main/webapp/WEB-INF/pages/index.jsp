@@ -82,26 +82,34 @@
 
         <div id="login">
           <h1>Welcome Back!</h1>
-          <c:url value="/j_spring_security_check" var="loginUrl" />
-          <form action="${loginUrl}" method="post">
-
+          <form action="/login" method="post">
+            <c:if test="${param.error != null}">
+              <div class="alert alert-danger">
+                <p>Invalid username and password.</p>
+              </div>
+            </c:if>
+            <c:if test="${param.logout != null}">
+              <div class="alert alert-success">
+                <p>You have been logged out successfully.</p>
+              </div>
+            </c:if>
             <div class="field-wrap">
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="email" name="j_email" required autocomplete="off"/>
+            <input type="email" name="email" required autocomplete="off"/>
           </div>
 
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password" name="j_password" required autocomplete="off"/>
+            <input type="password" name="password" required autocomplete="off"/>
           </div>
 
           <!--p class="forgot"><a href="#">Forgot Password?</a></p-->
-
-          <button class="button button-block"/>Log In</button>
+          <button class="button button-block" name="${_csrf.parameterName}"
+                  value="${_csrf.token}"/>Log In</button>
 
           </form>
 

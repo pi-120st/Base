@@ -33,9 +33,13 @@ public class BaseController {
         return getSignUp();
     }
 
-//    @RequestMapping("/login")
-//    public String employeePage(){
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        return "employee";
-//    }
+    @RequestMapping("/employee")
+    public String employeePage(){
+        return "employee";
+    }
+
+    @RequestMapping("/admin")
+    public String adminPage(){
+        return "admin";
+    }
 }
