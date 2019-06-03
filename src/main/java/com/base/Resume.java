@@ -18,9 +18,9 @@ public class Resume {
     @GeneratedValue
     private long resumeId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId")
-    private UserInfo user;
+    @ManyToOne()
+    @JoinColumn(name = "signId")
+    private SignUp signUp;
 
     private String specialization;
     private float experience;
@@ -31,8 +31,8 @@ public class Resume {
     private Currency salary;
     private String resumeText;
 
-    public Resume(UserInfo user, String specialization, float experience, String schedule, Date creationDate, Currency salary, String resumeText) {
-        this.user = user;
+    public Resume(SignUp signUp, String specialization, float experience, String schedule, Date creationDate, Currency salary, String resumeText) {
+        this.signUp = signUp;
         this.specialization = specialization;
         this.experience = experience;
         this.schedule = schedule;

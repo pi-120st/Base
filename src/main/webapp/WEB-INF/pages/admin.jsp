@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,16 +23,16 @@
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#find">Вакансии</a>
+            <a class="nav-link" href="#find">Vacancy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#rezume"></a>
+            <a class="nav-link" href="#rezume">Summary</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#people">Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/logout">LogOut</a>
+            <form action="/logout" method="post"><input type="submit" class="btn btn-dark" value="LogOut"></form>
           </li>
         </ul>
       </nav>
@@ -44,14 +46,16 @@
         </form>
       </div>
       <div class="cards">
+        <c:forEach items="${vacancies}" var="vacancy">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">${project.name}</h4>
+            <h4 class="card-title">${vacancy.na}</h4>
             <p class="dataBegin">${project.date}</p>
             <p class="card-text">${project.description}</p>
             <form class="navbar-form" action="/block_post" method="post"><button type="submit" class="btn btn-dark card-btn">Block</button></form>
           </div>
         </div>
+        </c:forEach>
       </div>
     </div>
     <div class="tab-content" id="rezume">

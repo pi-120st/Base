@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../resources/css/employee.css">
+    <link rel="stylesheet" href="../../resources/css/employer.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
@@ -24,10 +24,10 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#find">Найти работу</a>
+                <a class="nav-link" href="#find">Найти сотрудников</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#rezume">Мои резюме</a>
+                <a class="nav-link" href="#rezume">Вакансии</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#me">Профиль</a>
@@ -47,33 +47,39 @@
             </form>
         </div>
         <div class="cards">
+            <c:forEach items="${signUps}" var="signUp">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">${project.name}</h4>
-                    <p class="dataBegin">${project.date}</p>
-                    <p class="card-text">${project.description}</p>
-                    <a href="#" class="card-link">Go to project</a>
+                    <h4 class="card-title">${signUp.firstName} ${signUp.lastName}</h4>
+                    <p class="dataBegin">${signUp.phone}</p>
+                    <p class="dataEnd">${signUp.email}</p>
+                    <!--a href="#" class="card-link">Go to rezume</a-->
                 </div>
             </div>
+            </c:forEach>
         </div>
     </div>
     <div class="tab-content" id="rezume">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/new_vacancy?id=${singUp.singId}">Создать новое</a>
+                    <a class="nav-link" href="/new_vacancy">Создать новую</a>
                 </li>
             </ul>
         </nav>
         <div class="cards">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">${project.name}</h4>
-                    <p class="dataBegin">${project.date}</p>
-                    <p class="card-text">${project.description}</p>
-                    <a href="#" class="card-link">Go to rezume</a>
+            <c:forEach items="${vacancies}" var="vacancy">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">${vacancy.vacancy}</h4>
+                        <p class="dataBegin">${vacancy.creationDate}</p>
+                        <p class="salary">Salary ${vacancy.salary}$</p>
+                        <p class="card-text">${vacancy.vacancyText}</p>
+                        <p class="experience">Experience: ${vacancy.experience} year</p>
+                        <!--a href="#" class="card-link">Go to project</a-->
+                    </div>
                 </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </div>

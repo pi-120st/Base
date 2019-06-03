@@ -53,7 +53,7 @@ button{
 }
 .card-body{
   position: relative;
-  height: 130px;
+  height: 160px;
 }
 .card-title{
   position: absolute;
@@ -83,4 +83,12 @@ button{
 .card-link{
   position: relative;
   top: 90%;
+}
+.salary{
+  position: relative;
+  left: 25%;
+}
+.experience{
+  position: relative;
+  top: 50%;
 }

@@ -19,16 +19,13 @@ public class UserInfo {
     @GeneratedValue
     private long UserId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "signId")
     private SignUp signUp;
 
     @Temporal(TemporalType.DATE)
     private Date birthday;
     private String city;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Resume> resumes = new ArrayList<Resume>();
 
     public UserInfo(SignUp signUp, Date birthday, String city) {
         this.signUp = signUp;
