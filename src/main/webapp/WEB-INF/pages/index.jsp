@@ -85,7 +85,7 @@
           <form action="/login" method="post">
             <c:if test="${param.error != null}">
               <div class="alert alert-danger">
-                <p>Invalid username and password.</p>
+                <p>Invalid username or password.</p>
               </div>
             </c:if>
             <div class="field-wrap">

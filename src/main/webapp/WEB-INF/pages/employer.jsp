@@ -48,14 +48,14 @@
         </div>
         <div class="cards">
             <c:forEach items="${signUps}" var="signUp">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">${signUp.firstName} ${signUp.lastName}</h4>
-                    <p class="dataBegin">${signUp.phone}</p>
-                    <p class="dataEnd">${signUp.email}</p>
-                    <!--a href="#" class="card-link">Go to rezume</a-->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">${signUp.firstName} ${signUp.lastName}</h4>
+                        <p class="dataBegin">${signUp.phone}</p>
+                        <p class="dataEnd">${signUp.email}</p>
+                        <!--a href="#" class="card-link">Go to rezume</a-->
+                    </div>
                 </div>
-            </div>
             </c:forEach>
         </div>
     </div>
@@ -80,6 +80,16 @@
                     </div>
                 </div>
             </c:forEach>
+        </div>
+    </div>
+    <div class="tab-content" id="me">
+        <div class="card">
+            <div class="card-body-user">
+                <h4 class="card-title">${signUp.firstName} ${signUp.lastName}</h4>
+                <p class="dataBegin">${signUp.phone}</p>
+                <p class="dataEnd">${signUp.email}</p>
+                <!--a href="#" class="card-link">Go to rezume</a-->
+            </div>
         </div>
     </div>
 </div>

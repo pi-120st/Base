@@ -22,15 +22,27 @@ body{
 /*.tab-content > div:last-child {
   display: none;
 }*/
-.cards{
+#find > .cards{
   width: 75%;
 }
 #rezume > .cards{
+  width: 90%;
+  margin: auto;
+}
+#rezume > .navbar{
+  width: 90%;
+  margin: auto;
+}
+#rezume{
   display: flex;
   flex-flow: column;
 }
-.cards > .card{
+#find > .cards > .card{
   margin-left: 20px;
+}
+#people > .cards{
+  width: 100%;
+  margin: auto;
 }
 .search{
   position: relative;
@@ -43,16 +55,17 @@ body{
 button{
   width: 100%;
 }
-.card-btn{
-  position: absolute;
-  width: 20%;
-  bottom: 10px;
-}
 .card-body{
   position: relative;
-  height: 160px;
+  height: 130px;
+}
+.card-body-user{
+  position: relative;
+  height: 130px;
+  width: 100%;
 }
 .card-title{
+  margin: 10px 0 0 10px;
   position: absolute;
   width: 70%;
 }
@@ -80,4 +93,12 @@ button{
 .card-link{
   position: relative;
   top: 90%;
+}
+.salary{
+  position: relative;
+  left: 25%;
+}
+.experience{
+  position: relative;
+  top: 50%;
 }

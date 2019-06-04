@@ -40,6 +40,10 @@ body{
 #find > .cards > .card{
   margin-left: 20px;
 }
+#me > .card{
+  width: 100%;
+  margin: auto;
+}
 .search{
   position: relative;
   width: 25%;
@@ -53,7 +57,12 @@ button{
 }
 .card-body{
   position: relative;
-  height: 160px;
+  height: 130px;
+}
+.card-body-user{
+  position: relative;
+  height: 130px;
+  width: 100%;
 }
 .card-title{
   position: absolute;

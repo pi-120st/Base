@@ -48,13 +48,22 @@ public class BaseController {
 
     @RequestMapping("/employer")
     public String employerPage(Model model) {
+        User user = (User)SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        SignUp signUp = baseService.findByLogin(user.getUsername());
+        long id = signUp.getSignId();
         model.addAttribute("signUps", baseService.findEmployee());
         model.addAttribute("vacancies", baseService.findVacancies());
+        model.addAttribute("signUp", baseService.findOneSign(id));
         return "employer";
     }
 
     @RequestMapping("/admin")
-    public String adminPage() {
+    public String adminPage(Model model) {
+        model.addAttribute("signUps", baseService.findSignUp());
+        model.addAttribute("vacancies", baseService.findVacancies());
         return "admin";
     }
 
